@@ -5,10 +5,11 @@
 
 set -e
 
-CREDENTIALS="$HOME/.dcycle-docker-credentials.sh"
+CREDENTIALS="$HOME/.tribus-docker-credentials.sh"
 
 if [ ! -f "$CREDENTIALS" ]; then
   echo "Please create $CREDENTIALS and add to it:"
+  echo "DOCKERHUB=hub.tribus.studio"
   echo "DOCKERHUBUSER=xxx"
   echo "DOCKERHUBPASS=xxx"
   exit;
@@ -36,9 +37,9 @@ cd ..
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 docker buildx inspect --bootstrap
-docker login -u"$DOCKERHUBUSER" -p"$DOCKERHUBPASS"
+docker login "$DOCKERHUB" -u"$DOCKERHUBUSER" -p"$DOCKERHUBPASS"
 
-docker buildx build -t TribusStudio/"$PROJECT":"$VERSION" --platform linux/amd64,linux/arm64/v8 --push .
-docker buildx build -t TribusStudio/"$PROJECT":"$MAJORVERSION" --platform linux/amd64,linux/arm64/v8 --push .
-docker buildx build -t TribusStudio/"$PROJECT":"$MAJORVERSION".$DATE --platform linux/amd64,linux/arm64/v8 --push .
-docker buildx build -t TribusStudio/"$PROJECT":"$VERSION".$DATE --platform linux/amd64,linux/arm64/v8 --push .
+docker buildx build -t "$DOCKERHUB"/"$PROJECT":"$VERSION" --platform linux/amd64,linux/arm64/v8 --push .
+docker buildx build -t "$DOCKERHUB"/"$PROJECT":"$MAJORVERSION" --platform linux/amd64,linux/arm64/v8 --push .
+docker buildx build -t "$DOCKERHUB"/"$PROJECT":"$MAJORVERSION".$DATE --platform linux/amd64,linux/arm64/v8 --push .
+docker buildx build -t "$DOCKERHUB"/"$PROJECT":"$VERSION".$DATE --platform linux/amd64,linux/arm64/v8 --push .
