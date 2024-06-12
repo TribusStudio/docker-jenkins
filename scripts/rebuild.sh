@@ -34,8 +34,8 @@ export DOCKER_CLI_EXPERIMENTAL=enabled
 ./scripts/run.sh
 cd ..
 
-docker buildx create --name mybuilder
-docker buildx use mybuilder
+docker buildx create --name tsbuilder
+docker buildx use tsbuilder
 docker buildx inspect --bootstrap
 docker login "$DOCKERHUB" -u"$DOCKERHUBUSER" -p"$DOCKERHUBPASS"
 
