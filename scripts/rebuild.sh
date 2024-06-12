@@ -26,8 +26,8 @@ VERSION='1.0'
 # Start by getting the latest version of the official node image
 docker pull node
 
-# See https://github.com/dcycle/prepare-docker-buildx, for M1 native images.
-git clone https://github.com/dcycle/prepare-docker-buildx.git
+# See https://github.com/TribusStudio/prepare-docker-buildx, for M1 native images.
+git clone https://github.com/TribusStudio/prepare-docker-buildx.git
 cd prepare-docker-buildx
 export DOCKER_CLI_EXPERIMENTAL=enabled
 ./scripts/run.sh
@@ -38,7 +38,7 @@ docker buildx use mybuilder
 docker buildx inspect --bootstrap
 docker login -u"$DOCKERHUBUSER" -p"$DOCKERHUBPASS"
 
-docker buildx build -t dcycle/"$PROJECT":"$VERSION" --platform linux/amd64,linux/arm64/v8 --push .
-docker buildx build -t dcycle/"$PROJECT":"$MAJORVERSION" --platform linux/amd64,linux/arm64/v8 --push .
-docker buildx build -t dcycle/"$PROJECT":"$MAJORVERSION".$DATE --platform linux/amd64,linux/arm64/v8 --push .
-docker buildx build -t dcycle/"$PROJECT":"$VERSION".$DATE --platform linux/amd64,linux/arm64/v8 --push .
+docker buildx build -t TribusStudio/"$PROJECT":"$VERSION" --platform linux/amd64,linux/arm64/v8 --push .
+docker buildx build -t TribusStudio/"$PROJECT":"$MAJORVERSION" --platform linux/amd64,linux/arm64/v8 --push .
+docker buildx build -t TribusStudio/"$PROJECT":"$MAJORVERSION".$DATE --platform linux/amd64,linux/arm64/v8 --push .
+docker buildx build -t TribusStudio/"$PROJECT":"$VERSION".$DATE --platform linux/amd64,linux/arm64/v8 --push .
